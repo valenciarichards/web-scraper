@@ -1,6 +1,8 @@
 import string
 import requests
 import json
+import os
+import re
 from bs4 import BeautifulSoup
 
 
@@ -48,34 +50,44 @@ def save_page_source_code(url):
         return "Content saved."
 
 
-def save_articles():
+def save_articles(n_pages, article_type):
     url = "https://www.nature.com/nature/articles"
-    try:
-        response = requests.get(url, headers={"Accept-Language": "en-US,en;q=0.5"})
-    except ConnectionError:
-        print("There was a problem reaching the website.")
-        return None
-    data = response.content
-    soup = BeautifulSoup(data, "html.parser")
     saved_articles = []
-    for article in soup.find_all("article"):
-        name = str(article.find("a").contents[0])
-        # Strip punctuation and replace spaces with underscores
-        name = name.translate(name.maketrans(" ", "_", string.punctuation)).replace("'", "")
-        href = article.find("a", {"data-track-action": "view article"})["href"].strip()
-        if article.find("span", {"data-test": "article.type"}).text.strip().lower() == "news":
-            article_response = requests.get("https://www.nature.com" + href,
-                                            headers={"Accept-Language": "en-US,en;q=0.5"})
-            news_data = article_response.content
-            news_soup = BeautifulSoup(news_data, "html.parser")
-            body = news_soup.find("div", {"class": "article__body"}).text.strip()
-            with open(name + ".txt", "wb") as file:
-                file.write(body.encode("UTF-8"))
-                saved_articles.append(name)
-    print("Saved articles:\n", saved_articles)
+    for page in range(1, n_pages + 1):
+        try:
+            os.mkdir(f"/home/valencia/PycharmProjects/Web Scraper/Web Scraper/task/Page_{page}")
+        except FileExistsError:
+            pass
+        try:
+            response = requests.get(url, headers={"Accept-Language": "en-US,en;q=0.5"})
+        except ConnectionError as conn_error:
+            print(conn_error)
+            return None
+        data = response.content
+        soup = BeautifulSoup(data, "html.parser")
+        for article in soup.find_all("article"):
+            name = str(article.find("a").contents[0])
+            # Strip punctuation and replace spaces with underscores
+            name = name.translate(name.maketrans(" ", "_", string.punctuation)).replace("'", "")
+            href = article.find("a", {"data-track-action": "view article"})["href"].strip()
+            if article.find("span", {"data-test": "article.type"}).text.strip().lower() == article_type:
+                article_response = requests.get("https://www.nature.com" + href,
+                                                headers={"Accept-Language": "en-US,en;q=0.5"})
+                article_data = article_response.content
+                article_soup = BeautifulSoup(article_data, "html.parser")
+                regex = re.compile(".*body.*")
+                body = article_soup.find("div", {"class": regex}).text.strip()
+                with open(f"Page_{page}/{name}.txt", "wb") as file:
+                    file.write(body.encode("UTF-8"))
+                    saved_articles.append(name)
+        next_page_link = soup.find("a", class_="c-pagination__link")["href"].strip()
+        url = "https://www.nature.com" + next_page_link
+    return "Saved articles:\n", saved_articles
 
 
-# user_url = input("Input the URL: \n")
-# print(save_page_source_code(user_url))
-
-save_articles()
+try:
+    number_of_pages = int(input())
+    type_of_article = input().lower().strip()
+    save_articles(number_of_pages, type_of_article)
+except ValueError as error:
+    print(error)
