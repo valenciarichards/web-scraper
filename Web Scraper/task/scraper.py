@@ -10,19 +10,19 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-# Set headers for requests.get()
+# Set headers for requests.get().
 headers = {"Accept-Language": "en-US,en;q=0.5"}
 
 
 # Stage 1
 def get_quote(url):
+    """Accept a URL and return its content in JSON format."""
     error_message = "Invalid quote resource!"
+    # Make the request and verify that the expected response is received.
     try:
         r = requests.get(url, headers=headers)
         content = json.loads(r.text)["content"]
-    except ConnectionError:
-        return error_message
-    except KeyError:
+    except ConnectionError or KeyError:
         return error_message
     if r.status_code != 200:
         return error_message
@@ -31,19 +31,24 @@ def get_quote(url):
 
 # Stage 2
 def get_movie_title_and_description(url):
+    """Accept a URL of a movie on IMDB.com and return its title and description."""
     content = {}
     error_message = "Invalid movie page!"
+    # Verify the URL.
     if not url.startswith("https://www.imdb.com/title/"):
         return error_message
+    # Make the request and verify that the expected response is received.
     try:
         r = requests.get(url, headers=headers)
     except ConnectionError:
         return error_message
     if r.status_code != 200:
         return error_message
+    # Parse the response content.
     soup = BeautifulSoup(r.content, "html.parser")
     content["title"] = soup.find("h1").contents[0].strip()
     content["description"] = soup.find("div", class_="summary_text").contents[0].strip()
+    # Verify that there is both a title and a description.
     try:
         assert content["title"] != [] and content["description"] != []
     except AssertionError:
@@ -53,6 +58,7 @@ def get_movie_title_and_description(url):
 
 # Stage 3
 def save_page_source_code(url):
+    """Accept a URL, save the source code to a file and return a status message."""
     r = requests.get(url, headers=headers)
     if r.status_code != 200:
         return "The URL returned " + str(r.status_code) + "!"
@@ -65,6 +71,7 @@ def save_page_source_code(url):
 
 # Stages 4 and 5
 def get_soup(url, page=None):
+    """Accept a URL and optional page number and return a 'soup' of its content."""
     params = {"page": page}
     try:
         r = requests.get(url, headers=headers, params=params)
@@ -75,6 +82,7 @@ def get_soup(url, page=None):
 
 
 def save_articles(n_pages, desired_article_type):
+    """Accept the number of pages and article type, save articles by page number and return a status message."""
     # Assign the default URL.
     url = "https://www.nature.com/nature/articles"
     for page in range(1, n_pages + 1):
