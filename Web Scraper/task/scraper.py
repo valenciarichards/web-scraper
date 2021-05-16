@@ -116,9 +116,14 @@ def save_articles(n_pages, desired_article_type):
     return "All articles saved."
 
 
-try:
-    number_of_pages = int(input())
-    type_of_article = input().lower().strip()
-    print(save_articles(number_of_pages, type_of_article))
-except ValueError as error:
-    print(error)
+def main():
+    try:
+        number_of_pages = int(input())
+        type_of_article = input().lower().strip()
+        print(save_articles(number_of_pages, type_of_article))
+    except ValueError as error:
+        print(error)
+
+
+if __name__ == "__main__":
+    main()
