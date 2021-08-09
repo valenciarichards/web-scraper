@@ -15,7 +15,7 @@ headers = {"Accept-Language": "en-US,en;q=0.5"}
 
 
 # Stage 1
-def get_quote(url):
+def get_content(url):
     """Accept a URL and return its content in JSON format."""
     error_message = "Invalid quote resource!"
     # Make the request and verify that the expected response is received.
@@ -71,7 +71,7 @@ def save_page_source_code(url):
 
 # Stages 4 and 5
 def get_soup(url, page=None):
-    """Accept a URL and optional page number and return a 'soup' of its content."""
+    """Accept a URL and optional page number and return a bs4.BeautifulSoup object of its content."""
     params = {"page": page}
     try:
         r = requests.get(url, headers=headers, params=params)
@@ -88,7 +88,7 @@ def save_articles(n_pages, desired_article_type):
     for page in range(1, n_pages + 1):
         # Create a directory to store articles.
         try:
-            os.mkdir(f"/home/valencia/PycharmProjects/Web Scraper/Web Scraper/task/Page_{page}")
+            os.mkdir(f"Page_{page}")
         except FileExistsError:
             pass
         # Get soup from page.
