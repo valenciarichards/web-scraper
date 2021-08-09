@@ -1,13 +1,13 @@
 # scraper.py
 
 # Import standard library modules.
-import string
+import json
 import os
 import re
+import string
 
 # Import external modules.
 import requests
-import json
 from bs4 import BeautifulSoup
 
 # Set headers for requests.get().
@@ -118,8 +118,9 @@ def save_articles(n_pages, desired_article_type):
 
 def main():
     try:
-        number_of_pages = int(input())
-        type_of_article = input().lower().strip()
+        number_of_pages = int(input("Enter the number of pages to save: "))
+        type_of_article = input("Enter the type of article: ").lower().strip()
+        print("Processing...")
         print(save_articles(number_of_pages, type_of_article))
     except ValueError as error:
         print(error)
