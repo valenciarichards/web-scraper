@@ -15,9 +15,9 @@
 <h2>Objectives</h2>
 
 <ol>
-	<li>Feed your program a link to a movie description. This is an example of a correct link: <code class="language-python">https://www.imdb.com/title/tt0080684/</code>.</li>
-	<li>Inspect the page and find out how the movie's title and description are stored in the source code.</li>
-	<li>Download the webpage content, parse it using the beautifulsoup library, and print out the movie's original title and description in a dictionary.</li>
+	<li>Feed your program a link to a movie or a TV series description. This is an example of a correct link: <code class="language-python">https://www.imdb.com/title/tt0080684/</code>. Note that the link to a movie or a TV series always contains the word 'title' in it.</li>
+	<li>Inspect the page and find out how the movie's or a series' title and description are stored in the source code.</li>
+	<li>Download the webpage content, parse it using the beautifulsoup library, and print out the movie's original title and description in a dictionary. For example, you can find the title in the <code class="language-python">&lt;title&gt;</code> tag. The description can be found in the <code class="language-python">&lt;meta&gt;</code> tag with the following template: <code class="language-python">soup.find('meta', {'name':'description'})</code>. You can access the text within the tags via the <code class="language-python">text</code> and the <code class="language-python">['content']</code> attributes, respectively.</li>
 </ol>
 
 <p>If the received page doesn't have a movie description or is not an IMDb<strong> </strong>resource, the program should respond with the <code class="language-python">Invalid movie page!</code> message, just like in the previous stage.</p>

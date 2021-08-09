@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/455321/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Sun, 16 May 2021 18:21:33 UTC
+update_date: Mon, 09 Aug 2021 03:05:08 UTC
 stages:
 - id: 781
   step: 11755
@@ -32,6 +32,8 @@ topics:
     theory_id: 6752
   - title: Introduction to operating systems
     theory_id: 9704
+  - title: JSON
+    theory_id: 6854
   - title: Introduction to Python
     theory_id: 5204
   - title: Overview of the basic program
@@ -68,8 +70,6 @@ topics:
     theory_id: 6057
   - title: Packages
     theory_id: 6384
-  - title: JSON
-    theory_id: 6854
   - title: Command line overview
     theory_id: 8977
   - title: Parameters and options
@@ -114,6 +114,14 @@ topics:
     theory_id: 6865
   - title: Files
     theory_id: 13025
+  - title: File types
+    theory_id: 13017
+  - title: Introduction to Linux
+    theory_id: 9526
+  - title: File modes and permissions
+    theory_id: 13953
+  - title: Working with file modes and permissions
+    theory_id: 13961
   - title: Files in Python
     theory_id: 8691
   - title: Writing files

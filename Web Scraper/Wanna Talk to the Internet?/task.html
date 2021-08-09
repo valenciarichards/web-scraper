@@ -4,6 +4,8 @@
 
 <p>The user input may also contain an invalid URL or a non-existing quote resource, for example, <code class="java">http://api.quotable.io/quotes/1</code>, or a different Quotable page (<code class="java">http://api.quotable.io/authors</code>). Use <code class="java">if-else</code> statements to check the <code class="java">status_code</code> or the <code class="java">json </code>body response to print out the <code class="java">Invalid quote resource!</code> error message when the response code is different from 200, or when there is no quote in the <code class="java">json</code> body response. Your program should ask for input. </p>
 
+<p>You may also need a JSON decoder to solve this task. This will allow you to access particular features such as the content, headers, etc. You can use the <code class="java">json()</code> function from the <code class="java">requests</code> library or the <code class="java">loads()</code> function from the <code class="java">json</code> library. Check out the <a target="_blank" href="https://docs.python-requests.org/en/master/user/quickstart/#json-response-content" rel="noopener noreferrer nofollow">requests documentation</a> and the <a target="_blank" href="https://docs.python.org/3/library/json.html#module-json" rel="noopener noreferrer nofollow">json documentation</a> to learn more about them.</p>
+
 <h2>Objectives</h2>
 
 <p>In this stage, your program should: </p>

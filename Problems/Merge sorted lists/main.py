@@ -4,7 +4,7 @@ def merge_arrays(a, b):
     # CHECK that "a" or "b" are not empty
     while a or b:
         # CHECK that "b" is empty, or that "a" and "b" are not empty and compare the elements
-        if not b or a and b:
+        if not b or (a and b) and (a[0] < b[0]):
             # removing the first element from "a" and adding it to "c"
             c.append(a[0])
             a.pop(0)

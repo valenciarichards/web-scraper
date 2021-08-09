@@ -5,9 +5,9 @@
 <h2>Objectives</h2>
 
 <ol>
-	<li>Create a program that takes the <code class="java">https://www.nature.com/nature/articles</code> URL and then goes over the page source code searching for articles.</li>
+	<li>Create a program that takes the <code class="java">https://www.nature.com/nature/articles?sort=PubDate&amp;year=2020&amp;page=3</code> URL and then goes over the page source code searching for articles.</li>
 	<li>Detect the article type<em> </em>and the link to view<em> </em>the article<em> </em>tags and their attributes.</li>
-	<li>Save the contents of each article of the type "News" to a separate file named <em>%article_title%.txt</em>. Replace the whitespaces with underscores and remove punctuation marks in the filename (<code class="java">str.maketrans</code> and <code class="java">string.punctuation</code> will be useful for this). Also, strip<strong><em> </em></strong>all trailing whitespaces in the article body and title.</li>
+	<li>Save the contents of each article of the type "News", that is, the text from the article body without the tags, to a separate file named <em>%article_title%.txt</em>. When saving the file, replace the whitespaces in the name of the article with underscores and remove punctuation marks in the filename (<code class="java">str.maketrans</code> and <code class="java">string.punctuation</code> will be useful for this). Also, strip<strong><em> </em></strong>all trailing whitespaces in the article body and title. For example, the article with the title '<em>Legendary Arecibo telescope will close forever — scientists are reeling</em>' should be saved to the file named <em>Legendary_Arecibo_telescope_will_close_forever_scientists_are_reeling.txt</em>.</li>
 	<li>(Optional) You may output some result message once the saving is done, but it is not required.</li>
 </ol>
 
