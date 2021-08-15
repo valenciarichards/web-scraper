@@ -1,14 +1,17 @@
 # Web Scraper
 
-As is, the program accepts the number of pages and the type of articles from the user, then scrapes "https://www.nature.com/nature/articles" and saves all articles of the selected type to a folder.
+This scraper accepts the number of pages and type of articles from the user, scrapes [nature.com](https://www.nature.com/nature/articles) (once), and saves all articles of the selected type to individual text files organized in directories by page number.
 
 Functions from previous stages which can be called by editing the main() function include:
 
-- get_content(url)- Accept a URL and return its content in JSON format.
-- get_movie_title_and_description(url)- Accept a URL of a movie on IMDB.com and return its title and description.
-- save_page_source_code(url)- Accept a URL, save the source code to a file and return a status message.
+- get_content()
+  - Accept a URL and return its content in JSON format.
+- get_movie_title_and_description()
+  - Accept a URL of a movie on IMDB.com and return its title and description.
+- save_page_source_code()
+  - Accept a URL, save the source code to a file and return a status message.
 
-This app was built as a JetBrains Academy project, and the repository also contains my code snippets from exercises from JetBrains Academy's Python Developer track in the 'Problems' folder.
+This app was built as a JetBrains Academy project, and the repository also contains my code snippets from exercises from JetBrains Academy's Python Developer track in the "Problems" directory.
 
 ### External modules used
 
@@ -34,12 +37,12 @@ pip install -r requirements.txt
 
 ### Usage
 
-Navigate to 'Web Scraper/task' and run:
+Navigate to "Web Scraper/task" and run:
 
 ```
 python scraper.py
 ```
-then enter the number of pages to scrape and type of articles to save when prompted.
+Then, enter the number of pages and type of articles to scrape when prompted. The articles will be saved as individual ".txt" files organized in directories by page number.
 
 
 ## License
